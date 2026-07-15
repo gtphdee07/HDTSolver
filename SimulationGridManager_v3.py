@@ -50,7 +50,7 @@ class SimulationGridManager:
                 ]
             )
 
-            payload_weights = user_input["payload_weight_lbs"]
+            payload_weights = user_input["trailer_payload_lbs"]
             routes = user_input["route_corridor"]
 
             chassis_grid = list(
