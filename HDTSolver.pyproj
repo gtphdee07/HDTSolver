@@ -1,0 +1,53 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>230f757c-58a5-443a-9392-0b5246c1ccb4</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>HDTSolver.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>HDTSolver</Name>
+    <RootNamespace>HDTSolver</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="FleetDataVisualizer.py" />
+    <Compile Include="FleetFinanceEngine.py" />
+    <Compile Include="HDTSolver.py" />
+    <Compile Include="MechanicalPhysicsCalculator.py" />
+    <Compile Include="RegistryDatabase.py" />
+    <Compile Include="ScenarioExecutionWrapper.py" />
+    <Compile Include="SimulationGridManager_v3.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="engines.json" />
+    <Content Include="registries\engines.json" />
+    <Content Include="registries\transmissions.json" />
+    <Content Include="registries\trucks.json" />
+    <Content Include="registries\trucks_v1.json" />
+    <Content Include="transmissions.json" />
+    <Content Include="trucks.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="registries\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

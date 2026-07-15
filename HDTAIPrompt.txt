@@ -1,0 +1,42 @@
+You are acting as an elite Heavy Vehicle Powertrain Data Harvester. Your task is to look up and isolate official engineering specifications for the following target vehicle profile:
+
+[TARGET SPECIFICATION REQUEST]: "2025 Freightliner Cascadia with Detroit Diesel DD15 and Detroit DT12 Transmission"
+
+You must output your findings as three independent Markdown code blocks containing clean, raw data rows. Follow these strict formatting constraints:
+1. Do not use conversational filler, prose introductions, or explanations. 
+2. Floats and integers must be raw numeric symbols with no alphabetical letters or text tags (e.g., use 18400, not "18,400 lbs").
+3. Use comma-separated lists inside bracket characters for array structures.
+
+### BLOCK 1: Trucks_Chassis Tab Row Mapping
+Headers: Chassis_ID, Manufacturer, Model, Base_Tractor_Weight_lbs, Drag_Coefficient_Cd, Frontal_Area_SqFt, Aero_Constant_CdA, Max_Chassis_GVW_lbs, Valid_Engines, Valid_Transmissions, Valid_Rear_End_Ratios
+
+| Chassis_ID | Manufacturer | Model | Base_Tractor_Weight_lbs | Drag_Coefficient_Cd | Frontal_Area_SqFt | Aero_Constant_CdA | Max_Chassis_GVW_lbs | Valid_Engines | Valid_Transmissions | Valid_Rear_End_Ratios |
+| --- | :--- | :--- | --- | --- | --- | --- | --- | :--- | :--- | :--- |
+
+### BLOCK 2: Engines Tab Row Mapping
+Headers: Engine_ID, Manufacturer, Engine_Family, Displacement_Liters, Peak_Hp, Peak_Hp_Rpm, Torque_Profile_Type, Torque_Base_Lbft, Torque_Top_Lbft, Flat_Torque_Start_Rpm, Flat_Torque_End_Rpm, Engine_Redline_Rpm, Max_Braking_Hp, Engine_Idle_Rpm, Engine_Idle_Torque_Lbft, Lugging_Zone_Risk, Best_Bsfc_Value, Bsfc_Island_Low_Rpm, Blec_Island_High_Rpm, Bsfc_Island_Min_Load_Pct, Bsfc_Island_Max_Load_Pct, Outside_Island_Penalty_Per_100Rpm
+
+| Engine_ID | Manufacturer | Engine_Family | Displacement_Liters | Peak_Hp | Peak_Hp_Rpm | Torque_Profile_Type | Torque_Base_Lbft | Torque_Top_Lbft | Flat_Torque_Start_Rpm | Flat_Torque_End_Rpm | Engine_Redline_Rpm | Max_Braking_Hp | Engine_Idle_Rpm | Engine_Idle_Torque_Lbft | Lugging_Zone_Risk | Best_Bsfc_Value | Bsfc_Island_Low_Rpm | Bsfc_Island_High_Rpm | Bsfc_Island_Min_Load_Pct | Bsfc_Island_Max_Load_Pct | Outside_Island_Penalty_Per_100Rpm |
+| --- | :--- | :--- | --- | --- | --- | :--- | --- | --- | --- | --- | --- | --- | --- | --- | :--- | --- | --- | --- | --- | --- | --- |
+
+### BLOCK 3: Transmissions Tab Row Mapping
+Headers: Transmission_ID, Manufacturer, Model, Type, Forward_Gears, Max_Input_Torque_lbft, Max_GCW_Limit_lbs, Fluid_Friction_Loss_Pct, Gear_1_Ratio, Gear_2_Ratio, Gear_3_Ratio, Gear_4_Ratio, Gear_5_Ratio, Gear_6_Ratio, Gear_7_Ratio, Gear_8_Ratio, Gear_9_Ratio, Gear_10_Ratio, Gear_11_Ratio, Gear_12_Ratio
+
+| Transmission_ID | Manufacturer | Model | Type | Forward_Gears | Max_Input_Torque_lbft | Max_GCW_Limit_lbs | Fluid_Friction_Loss_Pct | Gear_1_Ratio | Gear_2_Ratio | Gear_3_Ratio | Gear_4_Ratio | Gear_5_Ratio | Gear_6_Ratio | Gear_7_Ratio | Gear_8_Ratio | Gear_9_Ratio | Gear_10_Ratio | Gear_11_Ratio | Gear_12_Ratio |
+| --- | :--- | :--- | :--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+
+You are acting as an elite Commercial Fleet Maintenance Director and Heavy Duty Master Diesel Mechanic. Your task is to look up, synthesize, and isolate official service bulletin lifecycle intervals and average independent shop repair costs for the following target powertrain configuration:
+
+[TARGET ENGINE REQUEST]: "Volvo D13 or Detroit DD15 engine with automated manual transmission"
+
+You must output your findings as a single Markdown code block containing a raw, copy-paste table matching the exact headers below. 
+
+Follow these strict formatting constraints:
+1. Do not use conversational filler, prose introductions, summaries, or explanations.
+2. All cost estimates and mileage intervals must be raw numeric symbols with no alphabetical letters, currency symbols, commas, or text tags (e.g., use 25000, not "$25,000").
+
+Headers: Engine_Transmission_Link, PM_Interval_Miles, PM_Cost_Est, Valve_Overhead_Interval_Miles, Valve_Overhead_Cost, DPF_Clean_Interval_Miles, DPF_Clean_Cost, AMT_Clutch_Interval_Miles, AMT_Clutch_Cost, Major_Overhaul_Interval_Miles, Major_Overhaul_Cost
+
+| Engine_Transmission_Link | PM_Interval_Miles | PM_Cost_Est | Valve_Overhead_Interval_Miles | Valve_Overhead_Cost | DPF_Clean_Interval_Miles | DPF_Clean_Cost | AMT_Clutch_Interval_Miles | AMT_Clutch_Cost | Major_Overhaul_Interval_Miles | Major_Overhaul_Cost |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
