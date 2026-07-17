@@ -1,12 +1,8 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 import os
-import fleet_state
-# =====================================================================
-# SYSTEM DATA DICTIONARY ENGINE: EXCEL DATABASE INTAKE
-# =====================================================================
+import fleet_state  # Imports the shared memory space module
+
 class ExcelFleetDatabase:
     def __init__(self, excel_path="Fleet_Equipment_Database.xlsx"):
         self.excel_path = excel_path
@@ -16,8 +12,8 @@ class ExcelFleetDatabase:
 
     def load_database_from_excel(self):
         """
-        Scans column-oriented vertical sheets inside the master workbook
-        and reverses them natively into relational python dictionaries.
+        Scans vertical sheets, reverses them into profiles, and natively
+        publishes them straight into the global fleet_state memory scope.
         """
         if not os.path.exists(self.excel_path):
             raise FileNotFoundError(
@@ -76,7 +72,7 @@ class ExcelFleetDatabase:
                         else:
                             self.engines[e_key][clean_key] = str(val)
 
-            # 3. PARSE TRUCKS CHASSIS TAB (With updated GVWR/GCWR key bounds)
+            # 3. PARSE TRUCKS CHASSIS TAB
             df_ch = pd.read_excel(self.excel_path, sheet_name='Trucks_Chassis')
             df_ch = df_ch.replace({np.nan: None})
             headers_ch = list(df_ch['Parameter_Header'])
@@ -109,9 +105,14 @@ class ExcelFleetDatabase:
                         if val is not None and val != "":
                             self.trucks[ch_key]["valid_rear_end_ratios"].append(float(val))
                             
-            print("Excel Engine: Master vehicle data specifications parsed successfully.")
+            # =================================================================
+            # THE SINGLE SOURCE TRUTH BINDING: EXTEND TO SHARED MODULE SPACE
+            # =================================================================
+            fleet_state.TRANSMISSION_REGISTRY = self.transmissions
+            fleet_state.ENGINE_REGISTRY = self.engines
+            fleet_state.TRUCK_CHASSIS_REGISTRY = self.trucks
+            
+            print("Excel Engine: Master asset vectors loaded and broadcasted to shared state.")
         except Exception as e:
-            raise ValueError(f"Excel Compilation Crash: O&M mapping failed on index parsing. Details: {e}")
-        fleet_state.TRANSMISSION_REGISTRY = self.transmissions
-        fleet_state.ENGINE_REGISTRY = self.engines
-        fleet_state.TRUCK_CHASSIS_REGISTRY = self.trucks
+            raise ValueError(f"Excel Loading Failure: Row mismatch inside index unpacking loop. Details: {e}")
+

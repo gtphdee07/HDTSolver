@@ -2,9 +2,11 @@
 # PIPELINE EXECUTION ENTRYPOINT
 # =====================================================================
 import MechanicalPhysicsCalculator
+from RegistryDatabase import ROUTE_SCENARIO_PROFILES
 import ScenarioExecutionWrapper
 import FleetDataVisualizer
-import ExcelFleetDatabase
+from ExcelLoader import ExcelFleetDatabase
+
 #from RegistryDatabase import TRUCK_CHASSIS_REGISTRY, ENGINE_REGISTRY, TRANSMISSION_REGISTRY
 
 
@@ -14,13 +16,14 @@ import ExcelFleetDatabase
 if __name__ == '__main__':
     # 1. Instantiate the column-oriented Excel parser object
     # This reads Fleet_Equipment_Database.xlsx and populates the global dictionaries!
-    fleet_db = ExcelFleetDatabase.ExcelFleetDatabase(excel_path="Fleet_Equipment_Database.xlsx")
+    fleet_db = ExcelFleetDatabase(excel_path="Fleet_Equipment_Database.xlsx")
     fleet_db.load_database_from_excel()
 
     # 2. Re-assign the master data boundaries so Module 3 reads your Excel parameters natively
     TRANSMISSION_REGISTRY = fleet_db.transmissions
     ENGINE_REGISTRY = fleet_db.engines
     TRUCK_CHASSIS_REGISTRY = fleet_db.trucks
+    #ROUTE_SCENARIO_PROFILES = fleet_db.
 
     # 3. Initialize the core physics calculator and Module 3
     physics_calc = MechanicalPhysicsCalculator.MechanicalPhysicsCalculator()

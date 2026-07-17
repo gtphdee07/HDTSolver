@@ -21,8 +21,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ExcelLoader.py" />
     <Compile Include="FleetDataVisualizer.py" />
     <Compile Include="FleetFinanceEngine.py" />
+    <Compile Include="fleet_state.py" />
     <Compile Include="HDTSolver.py" />
     <Compile Include="MechanicalPhysicsCalculator.py" />
     <Compile Include="RegistryDatabase.py" />
@@ -31,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="engines.json" />
+    <Content Include="Fleet_Equipment_Database.xlsx" />
     <Content Include="registries\engines.json" />
     <Content Include="registries\transmissions.json" />
     <Content Include="registries\trucks.json" />

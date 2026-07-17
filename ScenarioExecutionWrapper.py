@@ -5,11 +5,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 from SimulationGridManager_v3 import SimulationGridManager
-import RegistryDatabase
-from RegistryDatabase import TRUCK_CHASSIS_REGISTRY, ENGINE_REGISTRY, TRANSMISSION_REGISTRY, ROUTE_SCENARIO_PROFILES
+#import RegistryDatabase
+#from RegistryDatabase import TRUCK_CHASSIS_REGISTRY, ENGINE_REGISTRY, TRANSMISSION_REGISTRY, ROUTE_SCENARIO_PROFILES
+#from RegistryDatabase import ROUTE_SCENARIO_PROFILES
 import MechanicalPhysicsCalculator
 import FleetDataVisualizer
 import ExcelFleetDatabase
+import fleet_state
 
 
 # =====================================================================
@@ -28,14 +30,18 @@ class ScenarioExecutionWrapper:
         long_form_records = []
 
         for scenario_key in target_scenario_keys:
-            scenario = ROUTE_SCENARIO_PROFILES[scenario_key]
+            scenario = fleet_state.ROUTE_SCENARIO_PROFILES[scenario_key]
             
             for hw in validated_hardware:
                 if hw['route'] != scenario_key: continue
+
+                ch_data = fleet_state.TRUCK_CHASSIS_REGISTRY[hw['chassis_key']]
+                eng_data = fleet_state.ENGINE_REGISTRY[hw['engine_key']]
+                trans_data = fleet_state.TRANSMISSION_REGISTRY[hw['transmission_key']]
                 
-                ch_data = TRUCK_CHASSIS_REGISTRY[hw['chassis_key']]
-                eng_data = ENGINE_REGISTRY[hw['engine_key']]
-                trans_data = TRANSMISSION_REGISTRY[hw['transmission_key']]
+                ##ch_data = TRUCK_CHASSIS_REGISTRY[hw['chassis_key']]
+                #eng_data = ENGINE_REGISTRY[hw['engine_key']]
+                #trans_data = fleet_state.TRANSMISSION_REGISTRY[hw['transmission_key']]
                 
                 # Calculate absolute max climbing speed limit up a 6% grade for this config
                 eta_trans = 1.0 - trans_data['fluid_friction_loss_pct']

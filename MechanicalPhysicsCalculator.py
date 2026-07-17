@@ -4,8 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
-import RegistryDatabase
-from RegistryDatabase import TRUCK_CHASSIS_REGISTRY, ENGINE_REGISTRY, TRANSMISSION_REGISTRY, ROUTE_SCENARIO_PROFILES
+import fleet_state
+#import RegistryDatabase
+#from RegistryDatabase import TRUCK_CHASSIS_REGISTRY, ENGINE_REGISTRY, TRANSMISSION_REGISTRY, ROUTE_SCENARIO_PROFILES
 
 class MechanicalPhysicsCalculator:
     def __init__(self):
@@ -21,7 +22,7 @@ class MechanicalPhysicsCalculator:
         """
         Calculates exact engine torque based on inflection boundaries.
         """
-        eng = ENGINE_REGISTRY[engine_key]
+        eng = fleet_state.ENGINE_REGISTRY[engine_key]
         peak_torque = eng['torque_top_lbft'] if top_gear_active else eng['torque_base_lbft']
         
         if current_rpm < eng['flat_torque_start_rpm']:
@@ -42,15 +43,15 @@ class MechanicalPhysicsCalculator:
         Performs energy-balance physics calculations and dynamically solves for 
         the Speed Cushion (Delta V) and Incline Cushion (Delta Grade) shift boundaries.
         """
-        ch = TRUCK_CHASSIS_REGISTRY[profile['chassis_key']]
-        eng = ENGINE_REGISTRY[profile['engine_key']]
-        trans = TRANSMISSION_REGISTRY[profile['transmission_key']]
+        ch = fleet_state.TRUCK_CHASSIS_REGISTRY[profile['chassis_key']]
+        eng = fleet_state.ENGINE_REGISTRY[profile['engine_key']]
+        trans = fleet_state.TRANSMISSION_REGISTRY[profile['transmission_key']]
         
         speed = profile['speed_mph']
         axle = profile['axle_ratio']
         total_w = profile['weight_lbs'] # Standard alignment check input binding
         
-        scenario = ROUTE_SCENARIO_PROFILES[profile['route']]
+        scenario = fleet_state.ROUTE_SCENARIO_PROFILES[profile['route']]
         grade_factor = scenario['base_grade_pct'] / 100.0
         rolling_mod = self.rolling_resistance_coef + scenario['rolling_terrain_factor']
         
@@ -125,9 +126,9 @@ class MechanicalPhysicsCalculator:
         Sequentially drops gears from 12th down to 1st to find the exact gear
         and engine RPM required to sustain the test speed without stalling.
         """
-        ch = TRUCK_CHASSIS_REGISTRY[profile['chassis_key']]
-        eng = ENGINE_REGISTRY[profile['engine_key']]
-        trans = TRANSMISSION_REGISTRY[profile['transmission_key']]
+        ch = fleet_state.TRUCK_CHASSIS_REGISTRY[profile['chassis_key']]
+        eng = fleet_state.ENGINE_REGISTRY[profile['engine_key']]
+        trans = fleet_state.TRANSMISSION_REGISTRY[profile['transmission_key']]
         
         axle = profile['axle_ratio']
         total_w = profile['weight_lbs']
