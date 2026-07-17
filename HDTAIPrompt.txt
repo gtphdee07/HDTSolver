@@ -1,42 +1,99 @@
-You are acting as an elite Heavy Vehicle Powertrain Data Harvester. Your task is to look up and isolate official engineering specifications for the following target vehicle profile:
+YYou are acting as an elite Heavy-Duty Powertrain Engineer, Commercial Fleet Spec Director, and Data Extraction Specialist. Your objective is to look up, verify, and isolate official vehicle body builder manuals, SAE torque curves, and engineering sheets for the following target vehicle request:
 
-[TARGET SPECIFICATION REQUEST]: "2025 Freightliner Cascadia with Detroit Diesel DD15 and Detroit DT12 Transmission"
+[TARGET SPECIFICATION REQUEST]: "Insert year, make, model, and engine combo here (e.g., 2026 Freightliner Cascadia with Detroit DD13 and DT12 transmission)"
 
-You must output your findings as three independent Markdown code blocks containing clean, raw data rows. Follow these strict formatting constraints:
-1. Do not use conversational filler, prose introductions, or explanations. 
-2. Floats and integers must be raw numeric symbols with no alphabetical letters or text tags (e.g., use 18400, not "18,400 lbs").
-3. Use comma-separated lists inside bracket characters for array structures.
+You must output your findings as three independent Markdown code blocks containing clean, vertical data tables that match the explicit row structures and formatting constraints below.
 
-### BLOCK 1: Trucks_Chassis Tab Row Mapping
-Headers: Chassis_ID, Manufacturer, Model, Base_Tractor_Weight_lbs, Drag_Coefficient_Cd, Frontal_Area_SqFt, Aero_Constant_CdA, Max_Chassis_GVW_lbs, Valid_Engines, Valid_Transmissions, Valid_Rear_End_Ratios
+### CRITICAL STRUCTURAL CONSTRAINTS:
+1. Do NOT include conversational filler, prose introductions, summaries, or citations. Output ONLY the markdown blocks.
+2. All numbers must be raw numeric symbols. Do NOT include alphabetical text tags, unit descriptions, or commas inside integers/floats (e.g., use 18400, not "18,400 lbs" or "18400 lbs").
+3. If an engine or chassis parameter is unknown, leave the cell empty. Do NOT type placeholders like "N/A", "Unknown", or 0.
+4. Calculate Frontal_Area_SqFt from dimensions if required (Width x Height). Calculate Aero_Constant_CdA by multiplying Drag_Coefficient_Cd * Frontal_Area_SqFt.
+5. In the Transmissions tab, if the gearbox has fewer than 12 speeds, leave the trailing gear rows completely empty.
 
-| Chassis_ID | Manufacturer | Model | Base_Tractor_Weight_lbs | Drag_Coefficient_Cd | Frontal_Area_SqFt | Aero_Constant_CdA | Max_Chassis_GVW_lbs | Valid_Engines | Valid_Transmissions | Valid_Rear_End_Ratios |
-| --- | :--- | :--- | --- | --- | --- | --- | --- | :--- | :--- | :--- |
+---
 
-### BLOCK 2: Engines Tab Row Mapping
-Headers: Engine_ID, Manufacturer, Engine_Family, Displacement_Liters, Peak_Hp, Peak_Hp_Rpm, Torque_Profile_Type, Torque_Base_Lbft, Torque_Top_Lbft, Flat_Torque_Start_Rpm, Flat_Torque_End_Rpm, Engine_Redline_Rpm, Max_Braking_Hp, Engine_Idle_Rpm, Engine_Idle_Torque_Lbft, Lugging_Zone_Risk, Best_Bsfc_Value, Bsfc_Island_Low_Rpm, Blec_Island_High_Rpm, Bsfc_Island_Min_Load_Pct, Bsfc_Island_Max_Load_Pct, Outside_Island_Penalty_Per_100Rpm
+### BLOCK 1: Trucks_Chassis Tab Spec Sheet Mapping
+The first column MUST be titled "Parameter_Header". The second column must be titled with an underscored unique ID key for the vehicle. Fill the second column rows precisely matching the vertical data headers:
 
-| Engine_ID | Manufacturer | Engine_Family | Displacement_Liters | Peak_Hp | Peak_Hp_Rpm | Torque_Profile_Type | Torque_Base_Lbft | Torque_Top_Lbft | Flat_Torque_Start_Rpm | Flat_Torque_End_Rpm | Engine_Redline_Rpm | Max_Braking_Hp | Engine_Idle_Rpm | Engine_Idle_Torque_Lbft | Lugging_Zone_Risk | Best_Bsfc_Value | Bsfc_Island_Low_Rpm | Bsfc_Island_High_Rpm | Bsfc_Island_Min_Load_Pct | Bsfc_Island_Max_Load_Pct | Outside_Island_Penalty_Per_100Rpm |
-| --- | :--- | :--- | --- | --- | --- | :--- | --- | --- | --- | --- | --- | --- | --- | --- | :--- | --- | --- | --- | --- | --- | --- |
+| Parameter_Header | [INSERT_UNIQUE_CHASSIS_KEY] |
+| :--- | :--- |
+| Chassis_Key | [Insert unique string matching column header] |
+| Manufacturer | [Insert vehicle brand name] |
+| Model_Designation | [Insert exact model text] |
+| Base_Tractor_Weight_lbs | [Raw integer curb weight of unladen truck] |
+| Drag_Coefficient_Cd | [Raw float, e.g., 0.43] |
+| Frontal_Area_SqFt | [Raw integer frontal wind profile area] |
+| Aero_Constant_CdA | [Raw float, Cd * SqFt] |
+| Max_Chassis_GVWR_lbs | [Raw integer Gross Vehicle Weight Rating] |
+| Max_Chassis_GCWR_lbs | [Raw integer Gross Combination Weight Rating] |
+| Valid_Engines_List | [Comma-separated string list of valid registry keys] |
+| Valid_Transmissions_List | [Comma-separated string list of valid registry keys] |
+| Rear_Axle_Ratio_1 | [Raw float option 1] |
+| Rear_Axle_Ratio_2 | [Raw float option 2 or blank] |
+| Rear_Axle_Ratio_3 | [Raw float option 3 or blank] |
+| Rear_Axle_Ratio_4 | [Raw float option 4 or blank] |
+| Rear_Axle_Ratio_5 | [Blank or float] |
+| Rear_Axle_Ratio_6 | [Blank or float] |
+| Rear_Axle_Ratio_7 | [Blank or float] |
+| Rear_Axle_Ratio_8 | [Blank or float] |
+| Rear_Axle_Ratio_9 | [Blank or float] |
+| Rear_Axle_Ratio_10 | [Blank or float] |
 
-### BLOCK 3: Transmissions Tab Row Mapping
-Headers: Transmission_ID, Manufacturer, Model, Type, Forward_Gears, Max_Input_Torque_lbft, Max_GCW_Limit_lbs, Fluid_Friction_Loss_Pct, Gear_1_Ratio, Gear_2_Ratio, Gear_3_Ratio, Gear_4_Ratio, Gear_5_Ratio, Gear_6_Ratio, Gear_7_Ratio, Gear_8_Ratio, Gear_9_Ratio, Gear_10_Ratio, Gear_11_Ratio, Gear_12_Ratio
+---
 
-| Transmission_ID | Manufacturer | Model | Type | Forward_Gears | Max_Input_Torque_lbft | Max_GCW_Limit_lbs | Fluid_Friction_Loss_Pct | Gear_1_Ratio | Gear_2_Ratio | Gear_3_Ratio | Gear_4_Ratio | Gear_5_Ratio | Gear_6_Ratio | Gear_7_Ratio | Gear_8_Ratio | Gear_9_Ratio | Gear_10_Ratio | Gear_11_Ratio | Gear_12_Ratio |
-| --- | :--- | :--- | :--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+### BLOCK 2: Engines Tab Spec Sheet Mapping
+The first column MUST be titled "Parameter_Header". The second column must be titled with an underscored unique ID key for the engine. Fill the rows precisely:
 
+| Parameter_Header | [INSERT_UNIQUE_ENGINE_KEY] |
+| :--- | :--- |
+| Engine_Key | [Insert unique string matching column header] |
+| Manufacturer | [Insert engine builder name] |
+| Engine_Family | [Insert marketing/family name] |
+| Displacement_Liters | [Raw float engine size] |
+| Peak_Hp | [Raw integer maximum horsepower] |
+| Peak_Hp_Rpm | [Raw integer RPM where peak HP is achieved] |
+| Torque_Profile_Type | [Either "Fixed Torque" or "Multi-Torque"] |
+| Torque_Base_Lbft | [Raw integer maximum base torque rating] |
+| Torque_Top_Lbft | [Raw integer maximum top torque rating if multi-torque] |
+| Flat_Torque_Start_Rpm | [Raw integer where flat torque plateau begins] |
+| Flat_Torque_End_Rpm | [Raw integer where flat torque plateau drops off] |
+| Engine_Redline_Rpm | [Raw integer maximum safe electronic engine redline] |
+| Max_Braking_Hp | [Raw integer maximum engine/exhaust retarding braking power] |
+| Engine_Idle_Rpm | [Raw integer low operational idle speed] |
+| Engine_Idle_Torque_Lbft | [Raw integer torque potential at low idle] |
+| Lugging_Zone_Risk | [Text description of lugging profile risk, e.g., "High Structural Risk"] |
+| Best_Bsfc_Value | [Raw float baseline Brake Specific Fuel Consumption index, e.g., 0.285] |
+| Bsfc_Island_Low_RPM | [Raw integer lowest RPM wall of optimal fuel sweet spot] |
+| Bsfc_Island_High_RPM | [Raw integer highest RPM wall of optimal fuel sweet spot] |
+| Bsfc_Island_Min_Load_Pct | [Raw float low engine load threshold wall, e.g., 0.40] |
+| Bsfc_Island_Max_Load_Pct | [Raw float high engine load threshold wall, e.g., 0.85] |
+| Outside_Island_Penalty_Per_100Rpm | [Raw float fuel penalty multiplier, e.g., 0.04] |
 
-You are acting as an elite Commercial Fleet Maintenance Director and Heavy Duty Master Diesel Mechanic. Your task is to look up, synthesize, and isolate official service bulletin lifecycle intervals and average independent shop repair costs for the following target powertrain configuration:
+---
 
-[TARGET ENGINE REQUEST]: "Volvo D13 or Detroit DD15 engine with automated manual transmission"
+### BLOCK 3: Transmissions Tab Spec Sheet Mapping
+The first column MUST be titled "Parameter_Header". The second column must be titled with an underscored unique ID key for the transmission. Fill the rows precisely:
 
-You must output your findings as a single Markdown code block containing a raw, copy-paste table matching the exact headers below. 
-
-Follow these strict formatting constraints:
-1. Do not use conversational filler, prose introductions, summaries, or explanations.
-2. All cost estimates and mileage intervals must be raw numeric symbols with no alphabetical letters, currency symbols, commas, or text tags (e.g., use 25000, not "$25,000").
-
-Headers: Engine_Transmission_Link, PM_Interval_Miles, PM_Cost_Est, Valve_Overhead_Interval_Miles, Valve_Overhead_Cost, DPF_Clean_Interval_Miles, DPF_Clean_Cost, AMT_Clutch_Interval_Miles, AMT_Clutch_Cost, Major_Overhaul_Interval_Miles, Major_Overhaul_Cost
-
-| Engine_Transmission_Link | PM_Interval_Miles | PM_Cost_Est | Valve_Overhead_Interval_Miles | Valve_Overhead_Cost | DPF_Clean_Interval_Miles | DPF_Clean_Cost | AMT_Clutch_Interval_Miles | AMT_Clutch_Cost | Major_Overhaul_Interval_Miles | Major_Overhaul_Cost |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Parameter_Header | [INSERT_UNIQUE_TRANSMISSION_KEY] |
+| :--- | :--- |
+| Transmission_Key | [Insert unique string matching column header] |
+| Manufacturer | [Insert gearbox builder name] |
+| Model_Series | [Insert exact model text] |
+| Drivetrain_Type | [Either "Direct Drive (AMT)", "Overdrive (AMT)", or "Planetary Automatic"] |
+| Forward_Gears_Count | [Raw integer forward gear speeds] |
+| Max_Input_Torque_lbft | [Raw integer structural input torque rating] |
+| Max_GCW_Limit_lbs | [Raw integer gross combined weight ceiling limit] |
+| Fluid_Friction_Loss_Pct | [Raw float parasitic power loss, e.g., 0.03 for direct or 0.07 for planetary] |
+| Gear_1_Ratio | [Raw float reduction ratio] |
+| Gear_2_Ratio | [Raw float reduction ratio] |
+| Gear_3_Ratio | [Raw float reduction ratio] |
+| Gear_4_Ratio | [Raw float reduction ratio] |
+| Gear_5_Ratio | [Raw float reduction ratio or blank] |
+| Gear_6_Ratio | [Raw float reduction ratio or blank] |
+| Gear_7_Ratio | [Raw float reduction ratio or blank] |
+| Gear_8_Ratio | [Raw float reduction ratio or blank] |
+| Gear_9_Ratio | [Raw float reduction ratio or blank] |
+| Gear_10_Ratio | [Raw float reduction ratio or blank] |
+| Gear_11_Ratio | [Raw float reduction ratio or blank] |
+| Gear_12_Ratio | [Raw float reduction ratio or blank] |
