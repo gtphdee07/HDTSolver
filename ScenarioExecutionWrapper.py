@@ -104,6 +104,8 @@ class ScenarioExecutionWrapper:
                         'Truck_Model': ch_data['model'], 'Engine_Series': eng_data['engine_family'],
                         'Transmission': trans_data['model'], 'Axle_Ratio': hw['axle_ratio'],
                         'Trailer_Payload_lbs': hw['trailer_payload_lbs'], 'Weight_lbs': hw['weight_lbs'],
+                        'Max_Allowable_Tongue_Pct': hw['Max_Allowable_Tongue_Pct'],
+                        'Payload_Margin_lbs': hw['Payload_Margin_lbs'],
                         'Route_Scenario': scenario_key, 'Speed_MPH': round(speed, 1), 'Active_Gear': active_gear_label,
                         'Engine_Cruise_RPM': rpm, 'Calculated_MPG': mpg, 'Engine_Load_Pct': load,
                         'Speed_Cushion_MPH': speed_cushion, 'Grade_Cushion_Pct': grade_cushion,
