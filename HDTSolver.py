@@ -35,8 +35,9 @@ if __name__ == '__main__':
         'engine': ['ALL_VALID'], 
         'transmission': ['ALL_VALID'], 
         'axle_ratio': ['ALL_VALID'],
-        'trailer_payload_lbs':[23500], 
-        'route_corridor': ['I95_Fuel_Slasher', 'I40_Midwest_Rhythm', 'I70_Mountain_Conqueror']
+        'trailer_payload_lbs':[23500, 35000], 
+       # 'route_corridor': ['I95_Fuel_Slasher', 'I40_Midwest_Rhythm', 'I70_Mountain_Conqueror']
+        'route_corridor': ['I40_Midwest_Rhythm']
     }
 
     print("--- PIPELINE CORE TRIGGERED: SWEEPING EXCEL CONFIGURATIONS ---")
